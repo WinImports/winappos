@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WinAppOS — Download</title>
+  <meta name="description" content="Baixe o WinAppOS, o sistema de Ordens de Serviço para assistências técnicas. Versão de testes para Windows.">
+  <link rel="icon" href="./logo.png">
+  <style>
+    /* Cores da marca WinApp: preto, dourado e prata */
+    :root {
+      --black: #0B0B0C;
+      --graphite: #18181B;
+      --graphite-light: #27272A;
+      --gold: #D4A537;
+      --gold-light: #F3D27A;
+      --silver: #C0C2C7;
+      --text: #F4F4F5;
+      --muted: #A1A1AA;
+      --on-gold: #111111;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.55;
+      color: var(--text);
+      background: radial-gradient(900px 480px at 50% -120px, rgba(212, 165, 55, .16), transparent 70%), var(--black);
+    }
+    .page { max-width: 720px; margin: 0 auto; padding: 56px 16px 32px; }
+
+    /* Cabeçalho */
+    .hero { text-align: center; }
+    .logo { width: 112px; height: 112px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(212, 165, 55, .35), 0 18px 48px rgba(0, 0, 0, .6); }
+    h1 { margin: 20px 0 6px; font-size: clamp(2rem, 6vw, 2.75rem); font-weight: 700; letter-spacing: -.02em; }
+    h1 span { color: var(--gold); }
+    .tagline { margin: 0 auto; max-width: 30rem; color: var(--silver); font-size: 1.05rem; }
+
+    /* Botão de download */
+    .download {
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      margin-top: 32px; padding: 18px 32px; max-width: 100%;
+      font-size: 1.15rem; font-weight: 700; text-decoration: none; text-align: left;
+      color: var(--on-gold);
+      background: linear-gradient(180deg, var(--gold-light), var(--gold));
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(212, 165, 55, .28);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .download:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(212, 165, 55, .4); }
+    .download:focus-visible, .copy:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+    .download svg { flex: none; width: 26px; height: 26px; }
+    .meta { margin: 14px 0 0; color: var(--muted); font-size: .9rem; }
+
+    /* Cards */
+    .card {
+      margin-top: 28px; padding: 24px;
+      background: var(--graphite);
+      border: 1px solid var(--graphite-light);
+      border-radius: 16px;
+    }
+    .card h2 { margin: 0 0 12px; font-size: 1.15rem; font-weight: 600; }
+    .card p { margin: 0; color: var(--silver); }
+    .card.key { border-color: rgba(212, 165, 55, .45); }
+    .key-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 14px 0; }
+    .key-value {
+      flex: 1 1 auto; min-width: 0; padding: 12px 16px;
+      font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
+      font-size: 1.2rem; font-weight: 700; letter-spacing: .06em; overflow-wrap: anywhere;
+      color: var(--gold-light);
+      background: var(--black);
+      border: 1px dashed rgba(212, 165, 55, .5);
+      border-radius: 10px;
+    }
+    .copy {
+      flex: none; padding: 12px 18px;
+      font: inherit; font-weight: 600; cursor: pointer;
+      color: var(--text); background: var(--graphite-light);
+      border: 1px solid #3F3F46; border-radius: 10px;
+    }
+    .copy:hover { background: #3F3F46; }
+    .validity { display: inline-block; padding: 4px 12px; font-size: .9rem; font-weight: 600; color: var(--gold-light); background: rgba(212, 165, 55, .12); border-radius: 999px; }
+    .note { margin-top: 12px !important; font-size: .92rem; color: var(--muted) !important; }
+
+    /* Passo a passo */
+    .steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps li { position: relative; padding: 0 0 18px 48px; color: var(--silver); counter-increment: step; }
+    .steps li:last-child { padding-bottom: 0; }
+    .steps li::before {
+      content: counter(step);
+      position: absolute; left: 0; top: -2px;
+      width: 32px; height: 32px; line-height: 32px; text-align: center;
+      font-weight: 700; color: var(--on-gold); background: var(--gold); border-radius: 50%;
+    }
+    .steps strong { color: var(--text); }
+    .warning {
+      margin-top: 10px; padding: 12px 14px;
+      font-size: .95rem; color: var(--text);
+      background: rgba(212, 165, 55, .1);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+    }
+
+    footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: .85rem; }
+
+    @media (max-width: 480px) {
+      .page { padding-top: 36px; }
+      .download { width: 100%; padding: 16px 20px; font-size: 1.05rem; }
+      .copy { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { .download { transition: none; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <img class="logo" src="./logo.png" alt="Logotipo do WinAppOS" width="112" height="112">
+      <h1>WinApp<span>OS</span></h1>
+      <p class="tagline">Ordens de serviço, clientes, checklists e garantias da sua assistência técnica em um só lugar.</p>
+
+      <a class="download" href="https://github.com/WinImports/winappos/releases/download/v1.0.0-teste/WinApp-OS.Setup.1.0.0.exe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Baixar WinAppOS v1.0.0 (Windows)
+      </a>
+      <p class="meta">Versão de testes · Windows 10 ou 11 (64 bits) · 86 MB</p>
+    </header>
+
+    <section class="card key" aria-labelledby="titulo-chave">
+      <h2 id="titulo-chave">Chave de teste</h2>
+      <p>Use esta chave para liberar o aplicativo durante o período de testes:</p>
+      <div class="key-row">
+        <code class="key-value" id="chave">TESTE-WINAPP-2026</code>
+        <button type="button" class="copy" id="copiar" aria-live="polite">Copiar chave</button>
+      </div>
+      <span class="validity">Validade: 15 dias — até 25/10/2026</span>
+      <p class="note">O aplicativo já vem com esta chave preenchida. Ela só precisa ser digitada se a tela de licença aparecer.</p>
+    </section>
+
+    <section class="card" aria-labelledby="titulo-instalar">
+      <h2 id="titulo-instalar">Como instalar</h2>
+      <ol class="steps">
+        <li><strong>Baixe o instalador</strong> pelo botão acima e abra o arquivo <em>WinApp-OS.Setup.1.0.0.exe</em>.</li>
+        <li>
+          <strong>Libere o aviso do Windows.</strong> Como esta é uma versão de testes, o Windows SmartScreen pode mostrar a mensagem “O Windows protegeu o computador”.
+          <div class="warning">Clique em <strong>Mais informações</strong> e depois em <strong>Executar assim mesmo</strong>.</div>
+        </li>
+        <li><strong>Aguarde a instalação.</strong> O WinAppOS abre sozinho ao terminar e cria um atalho na área de trabalho.</li>
+        <li><strong>Mantenha a internet ligada na primeira abertura</strong> para a licença ser validada. Depois disso, o aplicativo funciona também sem conexão.</li>
+        <li><strong>Crie o seu usuário e senha</strong> na primeira tela e comece a usar.</li>
+      </ol>
+    </section>
+
+    <footer>&copy; 2026 WinApp-OS · Todos os direitos reservados.</footer>
+  </main>
+
+  <script>
+    // Botão "Copiar chave"
+    document.getElementById('copiar').addEventListener('click', async (e) => {
+      const button = e.currentTarget;
+      const key = document.getElementById('chave').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(key);
+        button.textContent = 'Copiada!';
+      } catch {
+        // Sem permissão de área de transferência: deixa a chave selecionada para Ctrl+C
+        window.getSelection().selectAllChildren(document.getElementById('chave'));
+        button.textContent = 'Pressione Ctrl+C';
+      }
+      setTimeout(() => { button.textContent = 'Copiar chave'; }, 2000);
+    });
+  </script>
+</body>
+</html>
