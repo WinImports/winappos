@@ -65,23 +65,13 @@
     .card p { margin: 0; color: var(--silver); }
     .card.key { border-color: rgba(212, 165, 55, .45); }
     .key-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 14px 0; }
-    .key-value {
-      flex: 1 1 auto; min-width: 0; padding: 12px 16px;
-      font-family: Consolas, "Cascadia Mono", ui-monospace, monospace;
-      font-size: 1.2rem; font-weight: 700; letter-spacing: .06em; overflow-wrap: anywhere;
-      color: var(--gold-light);
-      background: var(--black);
-      border: 1px dashed rgba(212, 165, 55, .5);
-      border-radius: 10px;
-    }
     .copy {
-      flex: none; padding: 12px 18px;
-      font: inherit; font-weight: 600; cursor: pointer;
+      flex: none; padding: 12px 18px; max-width: 100%; overflow-wrap: anywhere; text-align: center;
+      font: inherit; font-weight: 600; cursor: pointer; text-decoration: none;
       color: var(--text); background: var(--graphite-light);
       border: 1px solid #3F3F46; border-radius: 10px;
     }
     .copy:hover { background: #3F3F46; }
-    .validity { display: inline-block; padding: 4px 12px; font-size: .9rem; font-weight: 600; color: var(--gold-light); background: rgba(212, 165, 55, .12); border-radius: 999px; }
     .note { margin-top: 12px !important; font-size: .92rem; color: var(--muted) !important; }
 
     /* Passo a passo */
@@ -120,56 +110,38 @@
       <h1>WinApp<span>OS</span></h1>
       <p class="tagline">Ordens de serviço, clientes, checklists e garantias da sua assistência técnica em um só lugar.</p>
 
-      <a class="download" href="https://github.com/WinImports/winappos/releases/download/v1.0.1/WinApp-OS.Setup.1.0.1.exe">
+      <a class="download" href="https://github.com/WinImports/winappos/releases/download/v1.0.2/WinApp-OS.Setup.1.0.2.exe">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-        Baixar WinAppOS v1.0.1 (Windows)
+        Baixar WinAppOS v1.0.2 (Windows)
       </a>
       <p class="meta">Versão de testes · Windows 10 ou 11 (64 bits) · 86 MB</p>
     </header>
 
     <section class="card key" aria-labelledby="titulo-chave">
-      <h2 id="titulo-chave">Chave de teste</h2>
-      <p>Use esta chave para liberar o aplicativo durante o período de testes:</p>
+      <h2 id="titulo-chave">Chave de licença</h2>
+      <p>Na primeira abertura, o WinAppOS pede uma chave de licença. Peça a sua ao suporte:</p>
       <div class="key-row">
-        <code class="key-value" id="chave">TESTE-WINAPP-2026</code>
-        <button type="button" class="copy" id="copiar" aria-live="polite">Copiar chave</button>
+        <a class="copy" href="https://wa.me/5571996623005?text=Ol%C3%A1!%20Gostaria%20de%20uma%20chave%20de%20licen%C3%A7a%20do%20WinAppOS" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="copy" href="mailto:winimports.apps@gmail.com?subject=Chave%20de%20licen%C3%A7a%20do%20WinAppOS">winimports.apps@gmail.com</a>
       </div>
-      <span class="validity">Validade: 15 dias — até 25/10/2026</span>
-      <p class="note">O aplicativo já vem com esta chave preenchida. Ela só precisa ser digitada se a tela de licença aparecer.</p>
+      <p class="note">Cada chave vale para um número limitado de computadores.</p>
     </section>
 
     <section class="card" aria-labelledby="titulo-instalar">
       <h2 id="titulo-instalar">Como instalar</h2>
       <ol class="steps">
-        <li><strong>Baixe o instalador</strong> pelo botão acima e abra o arquivo <em>WinApp-OS.Setup.1.0.1.exe</em>.</li>
+        <li><strong>Baixe o instalador</strong> pelo botão acima e abra o arquivo <em>WinApp-OS.Setup.1.0.2.exe</em>.</li>
         <li>
           <strong>Libere o aviso do Windows.</strong> Como esta é uma versão de testes, o Windows SmartScreen pode mostrar a mensagem “O Windows protegeu o computador”.
           <div class="warning">Clique em <strong>Mais informações</strong> e depois em <strong>Executar assim mesmo</strong>.</div>
         </li>
         <li><strong>Aguarde a instalação.</strong> O WinAppOS abre sozinho ao terminar e cria um atalho na área de trabalho.</li>
-        <li><strong>Mantenha a internet ligada na primeira abertura</strong> para a licença ser validada. Depois disso, o aplicativo funciona também sem conexão.</li>
+        <li><strong>Digite a sua chave de licença</strong> na primeira abertura, com a internet ligada, para ela ser validada. Depois disso, o aplicativo funciona também sem conexão.</li>
         <li><strong>Crie o seu usuário e senha</strong> na primeira tela e comece a usar.</li>
       </ol>
     </section>
 
     <footer>&copy; 2026 WinApp-OS · Todos os direitos reservados.</footer>
   </main>
-
-  <script>
-    // Botão "Copiar chave"
-    document.getElementById('copiar').addEventListener('click', async (e) => {
-      const button = e.currentTarget;
-      const key = document.getElementById('chave').textContent.trim();
-      try {
-        await navigator.clipboard.writeText(key);
-        button.textContent = 'Copiada!';
-      } catch {
-        // Sem permissão de área de transferência: deixa a chave selecionada para Ctrl+C
-        window.getSelection().selectAllChildren(document.getElementById('chave'));
-        button.textContent = 'Pressione Ctrl+C';
-      }
-      setTimeout(() => { button.textContent = 'Copiar chave'; }, 2000);
-    });
-  </script>
 </body>
 </html>
